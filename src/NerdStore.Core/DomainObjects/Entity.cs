@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace NerdStore.Core.DomainObjects
 {
     public abstract class Entity
@@ -31,9 +32,9 @@ namespace NerdStore.Core.DomainObjects
             return a.Equals(b);
         }
 
-        public static bool operator != (Entity a, Entity b)
+        public static bool operator !=(Entity a, Entity b)
         {
-            return !(a == b); 
+            return !(a == b);
         }
 
         public override int GetHashCode()
@@ -43,7 +44,7 @@ namespace NerdStore.Core.DomainObjects
 
         public override string ToString()
         {
-            return $"{GetType().Name} [Id=]{Id}]";
+            return $"{GetType().Name} [Id={Id}]";
         }
     }
 }

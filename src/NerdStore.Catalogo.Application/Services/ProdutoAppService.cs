@@ -14,8 +14,8 @@ namespace NerdStore.Catalogo.Application.Services
         private readonly IEstoqueService _estoqueService;
         private readonly IMapper _mapper;
 
-        public ProdutoAppService(IProdutoRepository produtoRepository,
-                                 IMapper mapper,
+        public ProdutoAppService(IProdutoRepository produtoRepository, 
+                                 IMapper mapper, 
                                  IEstoqueService estoqueService)
         {
             _produtoRepository = produtoRepository;

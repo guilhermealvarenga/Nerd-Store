@@ -1,16 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DomainObjects\" />
-    <Folder Include="Data\" />
-    <Folder Include="Messages\" />
-    <Folder Include="Bus\" />
+    <PackageReference Include="mediatr" Version="7.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MediatR" Version="7.0.0" />
-  </ItemGroup>
+
 </Project>

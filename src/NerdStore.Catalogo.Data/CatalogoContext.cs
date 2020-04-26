@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using NerdStore.Catalogo.Domain;
 using NerdStore.Core.Data;
 
@@ -14,6 +17,7 @@ namespace NerdStore.Catalogo.Data
 
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,8 +42,24 @@ namespace NerdStore.Catalogo.Data
                     entry.Property("DataCadastro").IsModified = false;
                 }
             }
-
+            
             return await base.SaveChangesAsync() > 0;
+        }
+    }
+
+    public class DesignTimeCatalogoContextFactory : IDesignTimeDbContextFactory<CatalogoContext>
+    {
+        public CatalogoContext CreateDbContext(string[] args)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+            
+            var builder = new DbContextOptionsBuilder<CatalogoContext>();
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            builder.UseSqlServer(connectionString);
+            return new CatalogoContext(builder.Options);
         }
     }
 }
