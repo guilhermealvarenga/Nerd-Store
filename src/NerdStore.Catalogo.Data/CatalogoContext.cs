@@ -51,6 +51,7 @@ namespace NerdStore.Catalogo.Data
     {
         public CatalogoContext CreateDbContext(string[] args)
         {
+            // TODO: Utilizar o mesmo arquivo de confiração do projeto MVC
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
