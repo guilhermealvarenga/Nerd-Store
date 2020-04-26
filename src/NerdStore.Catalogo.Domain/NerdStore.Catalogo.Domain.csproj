@@ -7,4 +7,10 @@
   <ItemGroup>
     <ProjectReference Include="..\NerdStore.Core\NerdStore.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Events\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="7.0.0" />
+  </ItemGroup>
 </Project>
