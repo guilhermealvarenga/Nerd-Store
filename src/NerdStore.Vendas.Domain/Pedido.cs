@@ -136,5 +136,39 @@ namespace NerdStore.Vendas.Domain
             item.AtualizarUnidades(unidades);
             AtualizarItem(item);
         }
+
+        public void TornarRascunho()
+        {
+            PedidoStatus = PedidoStatus.Rascunho;
+        }
+
+        public void IniciarPedido()
+        {
+            PedidoStatus = PedidoStatus.Iniciado;
+        }
+
+        public void FinalizarPedido()
+        {
+            PedidoStatus = PedidoStatus.Pago;
+        }
+
+        public void CancelarPedido()
+        {
+            PedidoStatus = PedidoStatus.Cancelado;
+        }
+
+        public static class PedidoFactory
+        {
+            public static Pedido NovoPedidoRascunho(Guid clienteId)
+            {
+                var pedido = new Pedido
+                {
+                    ClienteId = clienteId,
+                };
+
+                pedido.TornarRascunho();
+                return pedido;
+            }
+        }
     }
 }
