@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NerdStore.Core.DomainObjects;
 
 namespace NerdStore.Vendas.Domain
@@ -17,6 +18,6 @@ namespace NerdStore.Vendas.Domain
         public bool Utilizado { get; private set; }
 
         // EF Rel.
-        public Pedido Pedido { get; set; }
+        public ICollection<Pedido> Pedidos { get; set; }
     }
 }

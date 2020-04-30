@@ -51,12 +51,15 @@ namespace NerdStore.Catalogo.Data
     {
         public CatalogoContext CreateDbContext(string[] args)
         {
-            // TODO: Utilizar o mesmo arquivo de confiração do projeto MVC
+            // TODO: Encapsular
+            var pathInitialProject = "NerdStore.WebApp.MVC";
+            var path = $"{Directory.GetParent(Directory.GetCurrentDirectory())}/{pathInitialProject}";
+
             IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-            
+           .SetBasePath(path)
+           .AddJsonFile("appsettings.json")
+           .Build();
+
             var builder = new DbContextOptionsBuilder<CatalogoContext>();
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             builder.UseSqlServer(connectionString);
