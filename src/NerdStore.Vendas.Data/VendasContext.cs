@@ -8,15 +8,19 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.EntityFrameworkCore.Design;
+using NerdStore.Core.Communication.Mediator;
 
 namespace NerdStore.Vendas.Data
 {
     public class VendasContext : DbContext, IUnitOfWork
     {
-        public VendasContext(DbContextOptions<VendasContext> options)
+        private readonly IMediatorHandler _mediatorHandler;
+
+        public VendasContext(DbContextOptions<VendasContext> options,
+                             IMediatorHandler mediatorHandler)
             : base(options)
         {
-
+            _mediatorHandler = mediatorHandler;
         }
 
         public DbSet<Pedido> Pedidos { get; set; }
@@ -38,8 +42,11 @@ namespace NerdStore.Vendas.Data
                     entry.Property("DataCadastro").IsModified = false;
                 }
             }
-            
-            return await base.SaveChangesAsync() > 0;
+
+            var sucesso = await base.SaveChangesAsync() > 0;
+            if (sucesso) await _mediatorHandler.PublicarEventos(this);
+
+            return sucesso;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -61,6 +68,13 @@ namespace NerdStore.Vendas.Data
 
     public class DesignTimeVendasContextFactory : IDesignTimeDbContextFactory<VendasContext>
     {
+        private readonly IMediatorHandler _mediatorHandler;
+
+        public DesignTimeVendasContextFactory(IMediatorHandler mediatorHandler)
+        {
+            _mediatorHandler = mediatorHandler;
+        }
+
         public VendasContext CreateDbContext(string[] args)
         {
             // TODO: Encapsular
@@ -75,7 +89,7 @@ namespace NerdStore.Vendas.Data
             var builder = new DbContextOptionsBuilder<VendasContext>();
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             builder.UseSqlServer(connectionString);
-            return new VendasContext(builder.Options);
+            return new VendasContext(builder.Options, _mediatorHandler);
         }
     }
 }
