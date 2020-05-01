@@ -9,4 +9,11 @@
     <PackageReference Include="FluentValidation" Version="8.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Communication\Mediator\" />
+    <Folder Include="Messages\CommonMessages\" />
+    <Folder Include="Messages\CommonMessages\DomainEvents\" />
+    <Folder Include="Messages\CommonMessages\Notifications\" />
+    <Folder Include="Messages\CommonMessages\IntegrationEvents\" />
+  </ItemGroup>  
 </Project>
