@@ -14,6 +14,7 @@ using NerdStore.Catalogo.Application.AutoMapper;
 using NerdStore.Catalogo.Data;
 using NerdStore.WebApp.MVC.Setup;
 using NerdStore.Vendas.Data;
+using System.Globalization;
 
 namespace NerdStore.WebApp.MVC
 {
@@ -85,6 +86,12 @@ namespace NerdStore.WebApp.MVC
                     name: "default",
                     template: "{controller=Vitrine}/{action=Index}/{id?}");
             });
+
+            var cultureInfo = new CultureInfo("pt-BR");
+            //cultureInfo.NumberFormat.CurrencySymbol = "R$";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
         }
     }
 }
