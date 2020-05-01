@@ -4,33 +4,29 @@ using NerdStore.Core.Messages;
 
 namespace NerdStore.Vendas.Application.Commands
 {
-    public class AdicionarItemPedidoCommand : Command
+    public class AtualizarItemPedidoCommand : Command
     {
         public Guid ClienteId { get; private set; }
         public Guid ProdutoId { get; private set; }
-        public string Nome { get; private set; }
         public int Quantidade { get; private set; }
-        public decimal ValorUnitario { get; private set; }
 
-        public AdicionarItemPedidoCommand(Guid clienteId, Guid produtoId, string nome, int quantidade, decimal valorUnitario)
+        public AtualizarItemPedidoCommand(Guid clienteId, Guid produtoId, int quantidade)
         {
             ClienteId = clienteId;
             ProdutoId = produtoId;
-            Nome = nome;
             Quantidade = quantidade;
-            ValorUnitario = valorUnitario;
         }
 
         public override bool EhValido()
         {
-            ValidationResult = new AdicionarItemPedidoValidation().Validate(this);
+            ValidationResult = new AtualizarItemPedidoValidation().Validate(this);
             return ValidationResult.IsValid;
         }
     }
 
-    public class AdicionarItemPedidoValidation : AbstractValidator<AdicionarItemPedidoCommand>
+    public class AtualizarItemPedidoValidation : AbstractValidator<AtualizarItemPedidoCommand>
     {
-        public AdicionarItemPedidoValidation()
+        public AtualizarItemPedidoValidation()
         {
             RuleFor(c => c.ClienteId)
                 .NotEqual(Guid.Empty)
@@ -40,10 +36,6 @@ namespace NerdStore.Vendas.Application.Commands
                 .NotEqual(Guid.Empty)
                 .WithMessage("Id do produto inválido");
 
-            RuleFor(c => c.Nome)
-                .NotEmpty()
-                .WithMessage("O nome do produto não foi informado");
-
             RuleFor(c => c.Quantidade)
                 .GreaterThan(0)
                 .WithMessage("A quantidade miníma de um item é 1");
@@ -51,10 +43,6 @@ namespace NerdStore.Vendas.Application.Commands
             RuleFor(c => c.Quantidade)
                 .LessThan(16)
                 .WithMessage("A quantidade máxima de um item é 15");
-
-            RuleFor(c => c.ValorUnitario)
-                .GreaterThan(0)
-                .WithMessage("O valor do item precisa ser maior que 0");
         }
     }
 }
