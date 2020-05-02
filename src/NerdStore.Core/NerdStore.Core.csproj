@@ -15,5 +15,7 @@
     <Folder Include="Messages\CommonMessages\DomainEvents\" />
     <Folder Include="Messages\CommonMessages\Notifications\" />
     <Folder Include="Messages\CommonMessages\IntegrationEvents\" />
+    <Folder Include="DomainObjects\DTO\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>  
 </Project>
