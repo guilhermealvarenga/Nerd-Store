@@ -37,7 +37,10 @@
     <ProjectReference Include="..\NerdStore.Vendas.Data\NerdStore.Vendas.Data.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\NerdStore.Vendas.Domain\NerdStore.Vendas.Domain.csproj">
+    <ProjectReference Include="..\NerdStore.Pagamentos.AntiCorruption\NerdStore.Pagamentos.AntiCorruption.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\NerdStore.Pagamentos.Data\NerdStore.Pagamentos.Data.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
