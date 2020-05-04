@@ -17,5 +17,6 @@
     <Folder Include="Messages\CommonMessages\IntegrationEvents\" />
     <Folder Include="DomainObjects\DTO\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Data\EventSourcing\" />
   </ItemGroup>  
 </Project>
