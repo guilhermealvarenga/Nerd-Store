@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using NerdStore.Core.Communication.Mediator;
 using NerdStore.Core.Data;
 using NerdStore.Core.DomainObjects;
 using NerdStore.Core.Messages;
 using NerdStore.Pagamentos.Business;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -57,6 +60,33 @@ namespace NerdStore.Pagamentos.Data
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
             base.OnModelCreating(modelBuilder);
+        }
+    }
+
+    public class DesignTimePagamentoContextFactory : IDesignTimeDbContextFactory<PagamentoContext>
+    {
+        private readonly IMediatorHandler _mediatorHandler;
+
+        public DesignTimePagamentoContextFactory(IMediatorHandler mediatorHandler)
+        {
+            _mediatorHandler = mediatorHandler;
+        }
+
+        public PagamentoContext CreateDbContext(string[] args)
+        {
+            // TODO: Encapsular no Core
+            var pathInitialProject = "NerdStore.WebApp.MVC";
+            var path = $"{Directory.GetParent(Directory.GetCurrentDirectory())}/{pathInitialProject}";
+
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(path)
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var builder = new DbContextOptionsBuilder<PagamentoContext>();
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            builder.UseSqlServer(connectionString);
+            return new PagamentoContext(builder.Options, _mediatorHandler);
         }
     }
 }

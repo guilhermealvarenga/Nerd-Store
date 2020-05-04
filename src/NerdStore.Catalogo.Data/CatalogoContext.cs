@@ -54,7 +54,7 @@ namespace NerdStore.Catalogo.Data
     {
         public CatalogoContext CreateDbContext(string[] args)
         {
-            // TODO: Encapsular
+            // TODO: Encapsular no Core
             var pathInitialProject = "NerdStore.WebApp.MVC";
             var path = $"{Directory.GetParent(Directory.GetCurrentDirectory())}/{pathInitialProject}";
 

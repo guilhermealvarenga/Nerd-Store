@@ -77,7 +77,7 @@ namespace NerdStore.Vendas.Data
 
         public VendasContext CreateDbContext(string[] args)
         {
-            // TODO: Encapsular
+            // TODO: Encapsular no Core
             var pathInitialProject = "NerdStore.WebApp.MVC";
             var path = $"{Directory.GetParent(Directory.GetCurrentDirectory())}/{pathInitialProject}";
 
