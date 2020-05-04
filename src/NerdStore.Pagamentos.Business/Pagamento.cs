@@ -12,7 +12,7 @@ namespace NerdStore.Pagamentos.Business
         public string NomeCartao { get; set; }
         public string NumeroCartao { get; set; }
         public string ExpiracaoCartao { get; set; }
-        public string CvvCartao { get; set; }
+        public string CvvCartao { get; set; }        
 
         // EF. Rel.
         public Transacao Transacao { get; set; }

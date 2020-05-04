@@ -29,7 +29,7 @@ namespace NerdStore.Pagamentos.AntiCorruption
                 PedidoId = pedido.Id,
                 Total = pedido.Valor,
                 PagamentoId = pagamento.Id
-            };
+            };            
 
             if (pagamentoResult)
             {

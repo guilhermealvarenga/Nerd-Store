@@ -16,11 +16,13 @@ namespace NerdStore.Pagamentos.Data
     public class PagamentoContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
-
-        public PagamentoContext(DbContextOptions<PagamentoContext> options, IMediatorHandler rebusHandler)
+      
+        public PagamentoContext(DbContextOptions<PagamentoContext> options,
+                                IMediatorHandler rebusHandler)
             : base(options)
         {
-            _mediatorHandler = rebusHandler ?? throw new ArgumentNullException(nameof(rebusHandler));
+            _mediatorHandler = rebusHandler; // HACK: Necessário para executar comando do EF no Mac OS.
+            //_mediatorHandler = rebusHandler ?? throw new ArgumentNullException(nameof(rebusHandler));
         }
 
         public DbSet<Pagamento> Pagamentos { get; set; }
@@ -66,6 +68,8 @@ namespace NerdStore.Pagamentos.Data
     public class DesignTimePagamentoContextFactory : IDesignTimeDbContextFactory<PagamentoContext>
     {
         private readonly IMediatorHandler _mediatorHandler;
+
+        public DesignTimePagamentoContextFactory() { }
 
         public DesignTimePagamentoContextFactory(IMediatorHandler mediatorHandler)
         {

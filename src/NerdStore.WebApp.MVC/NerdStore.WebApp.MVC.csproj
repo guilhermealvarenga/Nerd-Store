@@ -56,6 +56,8 @@
     <Folder Include="Views\Shared\Components\Summary\" />
     <Folder Include="Views\Carrinho\" />
     <Folder Include="Views\Shared\Components\Cart\" />
+    <Folder Include="Views\Pedido\" />
+    <Folder Include="Views\Eventos\" />
   </ItemGroup>
 
 </Project>

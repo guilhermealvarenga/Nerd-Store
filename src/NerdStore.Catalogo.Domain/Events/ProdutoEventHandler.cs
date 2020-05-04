@@ -6,7 +6,7 @@ using NerdStore.Core.Messages.CommonMessages.IntegrationEvents;
 
 namespace NerdStore.Catalogo.Domain.Events
 {
-    public class ProdutoEventHandler :
+    public class ProdutoEventHandler : 
         INotificationHandler<ProdutoAbaixoEstoqueEvent>,
         INotificationHandler<PedidoIniciadoEvent>,
         INotificationHandler<PedidoProcessamentoCanceladoEvent>
@@ -15,8 +15,8 @@ namespace NerdStore.Catalogo.Domain.Events
         private readonly IEstoqueService _estoqueService;
         private readonly IMediatorHandler _mediatorHandler;
 
-        public ProdutoEventHandler(IProdutoRepository produtoRepository,
-                                   IEstoqueService estoqueService,
+        public ProdutoEventHandler(IProdutoRepository produtoRepository, 
+                                   IEstoqueService estoqueService, 
                                    IMediatorHandler mediatorHandler)
         {
             _produtoRepository = produtoRepository;

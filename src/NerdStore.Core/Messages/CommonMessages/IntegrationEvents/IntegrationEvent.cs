@@ -1,8 +1,7 @@
-﻿using System;
-namespace NerdStore.Core.Messages.CommonMessages.IntegrationEvents
+﻿namespace NerdStore.Core.Messages.CommonMessages.IntegrationEvents
 {
-    public class IntegrationEvent : Event
+    public abstract class IntegrationEvent : Event
     {
-        
+
     }
 }
