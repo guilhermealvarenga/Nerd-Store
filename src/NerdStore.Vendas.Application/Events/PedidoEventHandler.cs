@@ -9,7 +9,6 @@ namespace NerdStore.Vendas.Application.Events
 {
     public class PedidoEventHandler :
         INotificationHandler<PedidoRascunhoIniciadoEvent>,
-        INotificationHandler<PedidoAtualizadoEvent>,
         INotificationHandler<PedidoItemAdicionadoEvent>,
         INotificationHandler<PedidoEstoqueRejeitadoEvent>,
         INotificationHandler<PagamentoRealizadoEvent>,
@@ -26,12 +25,7 @@ namespace NerdStore.Vendas.Application.Events
         public Task Handle(PedidoRascunhoIniciadoEvent message, CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
-        }
-
-        public Task Handle(PedidoAtualizadoEvent message, CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
+        }       
 
         public Task Handle(PedidoItemAdicionadoEvent message, CancellationToken cancellationToken)
         {
